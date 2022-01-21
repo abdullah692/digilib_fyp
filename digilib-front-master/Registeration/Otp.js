@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity,Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Password from './Password';
 import { set } from 'react-native-reanimated';
@@ -16,7 +16,12 @@ function Otp(props) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.register}>OTP VERIFICATION</Text>
+      <View style={styles.logo}>
+          <Image style={{ width:180, height:200 }} source={
+                        require('../assets/notification.png') } resizeMode="contain" />
+            </View>
+      <Text style={styles.register}>VERIFICATION</Text>
+      <Text style={{color:'#000',fontSize:15}}>Enter the 4 digit code</Text>
       <View style={styles.textinputs}>
         <TextInput
           maxLength={4}
@@ -31,12 +36,19 @@ function Otp(props) {
       </View>
 
       <View>
-        <TouchableOpacity
-          onPress={() => handleNext()}
-        >
-          <Text style={styles.btn}>VERIFY OTP</Text>
+      <TouchableOpacity onPress={() => handleNext()}>
+        <Text style={styles.btn}> VERIFY </Text>
+      </TouchableOpacity>
+      </View>
+      <View style={{flexDirection:'row' , margin:15}}>
+        <Text >
+          Didn't recieve an OTP?
+        </Text>
+        <TouchableOpacity>
+          <Text style={{ color: '#74b1e0'  ,marginHorizontal:10}}>Resend OTP</Text>
         </TouchableOpacity>
       </View>
+   
     </View>
   );
 }
@@ -46,35 +58,33 @@ export default Otp;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d8d8d8',
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  register: {
-    color: '#0F9E90',
-    textAlign: 'center',
-    fontSize: 30,
-    fontWeight: 'bold',
-    fontFamily: 'sans',
-    marginVertical: '10%'
-  },
-  btn:
+  logo:
   {
-    borderWidth: 2,
-    borderColor: '#0F9E90',
-    padding: 5,
-    fontSize: 25,
-    width: 200,
-    textAlign: 'center',
-    fontFamily: 'sans-serif',
-    borderRadius: 10,
-    color: '#fff',
-    backgroundColor: '#82BABC',
-    marginTop: '20%'
+    marginTop: -70,
   },
+  register: {
+    fontSize:30,
+    margin:10,
+    color:'#000'
+   },
+    btn:
+    {
+      fontSize: 30,
+      borderRadius: 60,
+      backgroundColor: '#74b1e0',
+      color: '#fff',
+      paddingHorizontal: 30,
+      paddingVertical: 10
+  
+    },
+  
   input: {
     width: '60%',
-    borderColor: '#0F9E90',
+    borderColor: '#74b1e0',
     borderBottomWidth: 2,
     flexDirection: 'column',
     alignContent: 'center',
