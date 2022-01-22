@@ -38,7 +38,7 @@ const styles=StyleSheet.create({
     },
     logo:
     {
-        marginTop:30,
+        marginTop:80,
     
     },
     btn:
@@ -47,6 +47,6 @@ const styles=StyleSheet.create({
     },
     footer:
     {
-        marginTop:90
+        marginTop:50
     }
 })

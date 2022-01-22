@@ -1,7 +1,21 @@
-import React from 'react'
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
+import React,{useState,useEffect} from 'react'
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity,Dimensions } from 'react-native'
+import Swiper from 'react-native-swiper'
+var { width } = Dimensions.get("window")
+
 
 function Home({navigation}) {
+    const [banner, setBanner] = useState([]);
+
+    useEffect(() => {
+        setBanner(["https://library.neduet.edu.pk/sites/default/files/library%20campus.png",
+            "https://library.neduet.edu.pk/sites/default/files/bbank.png",
+            "https://library.neduet.edu.pk/sites/default/files/CIR%201.png"])
+        return () => {
+            setBanner([])
+        }
+    }, [])
+
     return (
         <ScrollView>
 
@@ -19,8 +33,32 @@ function Home({navigation}) {
                         <Text style={styles.txt}>Digital Library</Text>
                     </TouchableOpacity>
                 </View>
+                
+                <View style={styles.swiper}>
+                    <Swiper
+                        style={{ height:width / 2 }}
+                        showButton={false}
+                        autoplay={true}
+                        autoplayTimeout={3}
+                    >
+                        {banner.map((item) => {
+                            return (
+                                <Image
+                                    key={item}
+                                    style={styles.imageBanner}
+                                   resizeMode="cover"
+                               source={{ uri: item }} />
+                            )
+                        })}
+                    </Swiper>
+                </View>
+           <View>
+           <Image style={{ width:360, height:120 ,marginHorizontal:15}} source={
+                        require('../../assets/abdulkalam.png') } resizeMode="contain" />
+           </View>
+          
                 <View >
-                    <Image style={{ width:450, height:300 }} source={
+                    <Image style={{ width:300, height:200,marginHorizontal:45}} source={
                         require('../../assets/library.jpg') } resizeMode="contain" />
                 </View>
 
@@ -40,6 +78,7 @@ function Home({navigation}) {
                     <Text style={styles.name}>Mrs. Huma Sardar (Ag. Librarian)</Text>
                 </View>
             </View>
+            
         </ScrollView>
     )
 }
@@ -50,6 +89,19 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
+    swiper:
+    {
+        width: width,
+        alignItems: 'center',
+        marginTop: 10
+    },
+    imageBanner:
+    {
+        height: width / 2,
+        width:"100%",
+        padding:2,
+    },
+   
     btns:
     {
         flex: 1,

@@ -21,7 +21,7 @@ const Stack = createStackNavigator();
 function HeaderImage(){
   return(
     <View>
-      <Image  style={{ width:100, height:50 }} source={
+      <Image  style={{ width:100, height:50 ,marginHorizontal:125}} source={
          require('../assets/digilib.jpeg') } resizeMode="contain"/>
     </View>
   )
@@ -30,8 +30,8 @@ function HeaderImage(){
 function StackHome() {
   return (
     <Stack.Navigator initialRouteName="Home" >
-      <Stack.Screen name="Home" component={Home}   options={{headerShown:false}}/>
-      <Stack.Screen name="Lending" component={Landing}  options={{headerShown:true}}/>
+      <Stack.Screen name="Home" component={Home}   options={{ headerTitle:(props) => <HeaderImage {...props} /> }} />
+      <Stack.Screen name="Lending" component={Landing}  />
       <Stack.Screen name="Reference" component={Reference} options={{headerShown:false}} />
       <Stack.Screen name="Digital Library" component={DigLib} options={{headerShown:false}}/>
     </Stack.Navigator>
@@ -41,7 +41,7 @@ function StackHome() {
 function StackRegisteration() {
     return (
       <Stack.Navigator initialRouteName="Main">
-        <Stack.Screen name="Main" component={Main} options={{headerShown:false}}/>
+        <Stack.Screen name="Main" component={Main} options={{ headerTitle:(props) => <HeaderImage {...props} />}} />
         <Stack.Screen name="SignUp" component={SignUp}  />
         <Stack.Screen name="Otp" component={Otp} />
         <Stack.Screen name="Password" component={Password} />
@@ -55,7 +55,7 @@ function StackRegisteration() {
   function StackAbout() {
     return (
       <Stack.Navigator initialRouteName="AboutUs" >
-        <Stack.Screen name="About Us" component={AboutUs}  options={{headerShown:false}}/>
+        <Stack.Screen name="About Us" component={AboutUs}  options={{ headerTitle:(props) => <HeaderImage {...props} /> }} />
         <Stack.Screen name="Donation" component={Donation} options={{headerShown:true}}/>
         <Stack.Screen name="Staff Directory" component={StaffDirect} options={{headerShown:false}}/>
       </Stack.Navigator>
@@ -63,4 +63,4 @@ function StackRegisteration() {
   }
 
 
-export  {StackHome,StackRegisteration ,StackAbout};
+export  {StackHome,StackRegisteration ,StackAbout ,HeaderImage};

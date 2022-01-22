@@ -4,6 +4,7 @@ import { View, StyleSheet, Text, TextInput, TouchableOpacity, Image } from 'reac
 import Error from './Error';
 import { Picker } from '@react-native-picker/picker';
 import Otp from './Otp';
+import { Register } from '../Drawer/Stacks';
 // import Register from './Register';
 
 function Login(props) {
@@ -87,10 +88,19 @@ function Login(props) {
         <TouchableOpacity  onPress={() => handleNext()}>
                 <Text style={styles.btn}> NEXT </Text>
             </TouchableOpacity>
-      <View>
-        <Text style={styles.forgot}>
-          Create Account    |   Forgot Password
+      <View style={{flexDirection:'row'}}>
+        <TouchableOpacity>
+        <Text style={styles.forgot} onPress={()=>navigation.navigate('SignUp')}>
+          Create Account  
         </Text>
+        </TouchableOpacity>
+        <Text style={{marginTop:20}}> | </Text>
+        <TouchableOpacity>
+        <Text style={styles.forgot}>
+          Forgot Password  
+        </Text>
+        </TouchableOpacity>
+       
       </View>
     </View>
   );
