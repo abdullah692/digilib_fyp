@@ -11,54 +11,64 @@ import {
 import Error from './Error';
 import {Picker} from '@react-native-picker/picker';
 import Otp from './Otp';
-import {Register} from '../Drawer/Stacks';
+import axios from 'axios';
 // import Register from './Register';
 
-function Login(props) {
+function SignUp(props) {
   const {navigation} = props;
   const [email, setEmail] = useState('');
   const [portal, setPortal] = useState('');
   const [error, setError] = useState('');
-  const [password, setPassword] = useState('');
-  const [allEntry, setAllEntry] = useState([]);
+  const [picker, setPicker] = useState('both');
+
   const handleSubmit = () => {
     const users = {
       email: email,
-      portal: portal,
-      password: password,
+      StudentId: portal,
+      registrationType: picker,
     };
-    if (email === '' && portal === '' && password === '') {
-      setError('Please fill your Credentials');
+    if (email === '' && portal === '') {
+      setError('Please fill your credentials');
     } else if (portal === '') {
-      setError('Please Enter Your Portal-Id');
+      setError('Please enter your portal-id');
     } else if (email === '') {
-      setError('Please Enter Your Email');
-    } else if (password === '') {
-      setError('Please Enter Your Password');
-    } else email && portal;
-    {
-      setAllEntry([users, ...allEntry]);
-      console.log(users);
-      console.log(allEntry);
-      console.log('Success..!!');
+      setError('Please enter your email');
+    } else {
+      setError('');
+      axios
+        .post('http://10.0.2.2:8080/api/verifyUser', users)
+        .then(res => {
+          const result = res.data;
+
+          if (!result.success) {
+            setError(result.message);
+          } else {
+            setPortal('');
+            setEmail('');
+            setError('');
+            navigation.navigate('Otp', users);
+          }
+        })
+        .catch(err => console.log(err));
     }
   };
 
   const handleNext = () => {
     handleSubmit();
-    navigation.navigate('Home');
+    // navigation.navigate('Otp');
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
         <Image
-          style={{width: 150, height: 150}}
+          style={{width: 150, height: 180}}
           source={require('../assets/fyplogo.png')}
           resizeMode="contain"
         />
       </View>
-      <Text style={styles.register}>WELCOME BACK!</Text>
+
+      <Text style={styles.register}>CREATE ACCOUNT</Text>
 
       <TextInput
         style={styles.text}
@@ -70,16 +80,21 @@ function Login(props) {
       <TextInput
         style={styles.text}
         placeholder="Email Address"
-        keyboardType="email-address"
         value={email}
         onChangeText={email => setEmail(email.toLowerCase())}
       />
-      <TextInput
-        style={styles.text}
-        placeholder="Password"
-        value={password}
-        onChangeText={pass => setPassword(pass.toLowerCase())}
-      />
+      <View style={styles.border}>
+        <Picker
+          selectedValue={picker}
+          style={{height: 50, width: 150}}
+          onValueChange={itemValue => setPicker(itemValue)}
+          style={styles.picker}>
+          <Picker.Item label="Both Department" value="both" />
+          <Picker.Item label="Book Bank Department" value="bookbank" />
+          <Picker.Item label="Circulation Department" value="circulation" />
+        </Picker>
+      </View>
+
       <View style={styles.error}>
         {error ? <Error message={error} /> : null}
       </View>
@@ -88,27 +103,26 @@ function Login(props) {
           <Text style={styles.middle}>Don't have any account yet?</Text>
           <Button title="Register"/>
         </View> */}
+
       <TouchableOpacity onPress={() => handleNext()}>
         <Text style={styles.btn}> NEXT </Text>
       </TouchableOpacity>
-      <View style={{flexDirection: 'row'}}>
+
+      <View style={{flexDirection: 'row', margin: 15}}>
+        <Text>Already have an account?</Text>
         <TouchableOpacity>
           <Text
-            style={styles.forgot}
-            onPress={() => navigation.navigate('SignUp')}>
-            Create Account
+            style={{color: '#74b1e0', marginHorizontal: 10}}
+            onPress={() => navigation.navigate('Login')}>
+            SIGN IN
           </Text>
-        </TouchableOpacity>
-        <Text style={{marginTop: 20}}> | </Text>
-        <TouchableOpacity>
-          <Text style={styles.forgot}>Forgot Password</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
 
-export default Login;
+export default SignUp;
 
 const styles = StyleSheet.create({
   container: {
@@ -118,7 +132,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    marginTop: -50,
+    marginTop: -70,
   },
   register: {
     fontSize: 30,
@@ -127,8 +141,7 @@ const styles = StyleSheet.create({
   },
   text: {
     borderBottomWidth: 2,
-    margin: 10,
-    marginVertical: 10,
+    marginVertical: 5,
     padding: 10,
     width: 250,
     borderColor: '#74b1e0',
@@ -136,7 +149,6 @@ const styles = StyleSheet.create({
   },
   error: {
     alignItems: 'center',
-    marginTop: 20,
   },
   btn: {
     fontSize: 30,
@@ -151,18 +163,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   border: {
-    borderColor: '#0F9E90',
+    borderColor: '#74b1e0',
     borderWidth: 2,
-    marginVertical: 30,
+    marginVertical: 20,
   },
   picker: {
-    width: 250,
-    height: 50,
-    alignItems: 'center',
+    width: 280,
     color: '#000',
   },
-  forgot: {
-    margin: 20,
-    fontSize: 15,
-  },
+  acount: {},
 });

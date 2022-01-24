@@ -5,10 +5,11 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import Error from './Error';
-import Home from '../Components/Home';
+import Home from '../Components/Home_Screens/Home';
 import {createStackNavigator} from '@react-navigation/stack';
 import axios from 'axios';
 
@@ -37,20 +38,24 @@ function Password(props) {
           setShowPass(false);
           const result = res.data;
           if (!result.success) return setError('Invalid request');
-          navigation.navigate('Home') || navigation.popToTop();
+          navigation.navigate('Welcome');
         })
         .catch(err => console.log(err));
     }
   };
   const handleNext = () => {
     handleSubmit();
-    // navigation.navigate('Home') || navigation.popToTop();
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.register}>Password</Text>
-
+      <View style={styles.logo}>
+        <Image
+          style={{width: 200, height: 200}}
+          source={require('../assets/lock.png')}
+          resizeMode="contain"
+        />
+      </View>
       <TextInput
         style={styles.text}
         placeholder="Enter Password"
@@ -77,8 +82,8 @@ function Password(props) {
 
       <View style={styles.error}>
         {error ? <Error message={error} /> : null}
-        <TouchableOpacity style={styles.button} onPress={() => handleNext()}>
-          <Text style={styles.btn}>SET PASSWORD</Text>
+        <TouchableOpacity onPress={() => handleNext()}>
+          <Text style={styles.btn}> SUBMIT </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -90,7 +95,7 @@ export default Password;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d8d8d8',
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -99,38 +104,27 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   btn: {
-    borderWidth: 2,
-    borderColor: '#0F9E90',
-    padding: 10,
-    fontSize: 25,
-    width: 250,
-    textAlign: 'center',
-    fontFamily: 'sans-serif',
-    borderRadius: 10,
+    fontSize: 30,
+    borderRadius: 60,
+    backgroundColor: '#74b1e0',
     color: '#fff',
-    backgroundColor: '#82BABC',
-    marginBottom: 20,
+    paddingHorizontal: 30,
+    paddingVertical: 10,
+    marginBottom: 30,
   },
+
   text: {
     borderBottomWidth: 2,
     margin: 10,
     marginVertical: 10,
     padding: 10,
     width: 250,
-    borderColor: '#0F9E90',
+    borderColor: '#74b1e0',
     color: '#000',
-  },
-  register: {
-    color: '#0F9E90',
-    textAlign: 'center',
-    fontSize: 45,
-    fontWeight: 'bold',
-    fontFamily: 'sans',
-    marginBottom: 20,
   },
   checkboxContainer: {
     flexDirection: 'row',
-    marginVertical: 25,
+    marginVertical: 10,
   },
   checkbox: {
     alignSelf: 'center',
