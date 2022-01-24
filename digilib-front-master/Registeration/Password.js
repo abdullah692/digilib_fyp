@@ -1,35 +1,50 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import Error from './Error';
 import Home from '../Components/Home';
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
+import axios from 'axios';
 
-function Password({ navigation }) {
+function Password(props) {
+  const {navigation, route} = props;
+  const [user, setUser] = useState(route.params || {});
   const [password, setPassword] = useState('');
   const [cnfrmPassword, setCnfrmPassword] = useState('');
   const [error, setError] = useState('');
   const [showPass, setShowPass] = useState(false);
-  const [allEntry, setAllEntry] = useState([]);
+
   const handleSubmit = () => {
-    const pass = {
-      password: password,
-      confirmPassword: cnfrmPassword
-    };
-    if (password === '' && cnfrmPassword === '') {
+    const body = {...user};
+    body.password = password;
+    if (password === '' || cnfrmPassword === '') {
       setError('Please ! Enter your Password');
     } else if (password != cnfrmPassword) {
-      setError('The Password you enter is incorrect');
+      setError('The Password you enter is not matched');
     } else {
-      console.log('Success..!!');
+      axios
+        .post('http://10.0.2.2:8080/api/setPassword', body)
+        .then(res => {
+          setPassword('');
+          setCnfrmPassword('');
+          setError('');
+          setShowPass(false);
+          const result = res.data;
+          if (!result.success) return setError('Invalid request');
+          navigation.navigate('Home') || navigation.popToTop();
+        })
+        .catch(err => console.log(err));
     }
-    setAllEntry([pass, ...allEntry])
-    console.log(pass);
-    console.log(allEntry);
   };
   const handleNext = () => {
     handleSubmit();
-    navigation.navigate('Home') || navigation.popToTop();
+    // navigation.navigate('Home') || navigation.popToTop();
   };
 
   return (
@@ -62,10 +77,7 @@ function Password({ navigation }) {
 
       <View style={styles.error}>
         {error ? <Error message={error} /> : null}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => handleNext()}
-        >
+        <TouchableOpacity style={styles.button} onPress={() => handleNext()}>
           <Text style={styles.btn}>SET PASSWORD</Text>
         </TouchableOpacity>
       </View>
@@ -86,8 +98,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 50,
   },
-  btn:
-  {
+  btn: {
     borderWidth: 2,
     borderColor: '#0F9E90',
     padding: 10,
@@ -98,7 +109,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     color: '#fff',
     backgroundColor: '#82BABC',
-    marginBottom: 20
+    marginBottom: 20,
   },
   text: {
     borderBottomWidth: 2,
@@ -107,7 +118,7 @@ const styles = StyleSheet.create({
     padding: 10,
     width: 250,
     borderColor: '#0F9E90',
-    color: '#000'
+    color: '#000',
   },
   register: {
     color: '#0F9E90',
@@ -116,7 +127,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'sans',
     marginBottom: 20,
-
   },
   checkboxContainer: {
     flexDirection: 'row',
