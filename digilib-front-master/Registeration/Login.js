@@ -4,7 +4,6 @@ import { View, StyleSheet, Text, TextInput, TouchableOpacity, Image } from 'reac
 import Error from './Error';
 import { Picker } from '@react-native-picker/picker';
 import Otp from './Otp';
-import { Register } from '../Drawer/Stacks';
 // import Register from './Register';
 
 function Login(props) {
@@ -16,25 +15,21 @@ function Login(props) {
   const [allEntry, setAllEntry] = useState([]);
   const handleSubmit = () => {
     const users = {
-      email: email,
       portal: portal,
       password: password
     };
-    if (email === '' && portal === '' && password==='') {
+    if (portal === '' && password==='') {
       setError('Please fill your Credentials');
     }
     else if( portal === '' )
     {
       setError('Please Enter Your Portal-Id');
     }
-    else if (email === '') {
-      setError('Please Enter Your Email');
-    }
     else if(password === '')
     {
       setError('Please Enter Your Password')
     }
-    else (email && portal)
+    else (password && portal)
     {
       setAllEntry([users, ...allEntry])
       console.log(users);
@@ -65,12 +60,7 @@ function Login(props) {
           onChangeText={id => setPortal(id.toLowerCase())}
 
         />
-        <TextInput
-          style={styles.text}
-          placeholder="Email Address"
-          value={email}
-          onChangeText={email => setEmail(email.toLowerCase())}
-        />
+        
         <TextInput
           style={styles.text}
           placeholder="Password"
@@ -88,19 +78,10 @@ function Login(props) {
         <TouchableOpacity  onPress={() => handleNext()}>
                 <Text style={styles.btn}> NEXT </Text>
             </TouchableOpacity>
-      <View style={{flexDirection:'row'}}>
-        <TouchableOpacity>
-        <Text style={styles.forgot} onPress={()=>navigation.navigate('SignUp')}>
-          Create Account  
-        </Text>
-        </TouchableOpacity>
-        <Text style={{marginTop:20}}> | </Text>
-        <TouchableOpacity>
+      <View>
         <Text style={styles.forgot}>
-          Forgot Password  
+          Create Account    |   Forgot Password
         </Text>
-        </TouchableOpacity>
-       
       </View>
     </View>
   );
@@ -139,14 +120,16 @@ const styles = StyleSheet.create({
   },
   btn:
   {
-      fontSize:30,
-      borderRadius:60,
+      fontSize:25,
+      borderRadius:5,
       backgroundColor:'#74b1e0',
       color:'#fff',
-      paddingHorizontal:30,
-      paddingVertical:10
+      paddingHorizontal:20,
+      paddingVertical:10,
+      marginBottom:20
 
-  },  middle: {
+  },  
+  middle: {
     margin: 10,
     textAlign: 'center',
   },

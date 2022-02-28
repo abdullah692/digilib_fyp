@@ -1,5 +1,5 @@
 import React from 'react';
-import {View  ,Image} from 'react-native'
+import {View  ,Image,StyleSheet} from 'react-native'
 import {createStackNavigator} from '@react-navigation/stack';
 import {createAppContainer} from 'react-navigation';
 import Home from '../Components/Home_Screens/Home';
@@ -15,25 +15,33 @@ import StaffDirect from '../Components/About_Screens/StaffDirect';
 import SignUp from '../Registeration/SignUp';
 import Main from '../Registeration/Main';
 import Welcome from '../Registeration/Welcome';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Contact from '../Components/Contact_Screens/ContactUs';
+import DrawerContainer from './DrawerContainer';
 
 const Stack = createStackNavigator();
 
-function HeaderImage(){
+function HeaderImage({navigation}){
   return(
-    <View>
-      <Image  style={{ width:100, height:50 ,marginHorizontal:125}} source={
+    <View style={styles.header}>
+      
+        { <Icon name="bars" size={20} style={{marginTop:10}} 
+        onPress={() =>navigation.openDrawer()}/> }
+      
+      <Image  style={{ width:150, height:50 ,marginHorizontal:100}} source={
          require('../assets/digilib.jpeg') } resizeMode="contain"/>
     </View>
   )
 }
 
+
 function StackHome() {
   return (
-    <Stack.Navigator initialRouteName="Home" >
-      <Stack.Screen name="Home" component={Home}   options={{ headerTitle:(props) => <HeaderImage {...props} /> }} />
-      <Stack.Screen name="Lending" component={Landing}  />
-      <Stack.Screen name="Reference" component={Reference} options={{headerShown:false}} />
-      <Stack.Screen name="Digital Library" component={DigLib} options={{headerShown:false}}/>
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="Home" component={Home} options={{headerShown :false}}/>
+      <Stack.Screen name="Lending" component={Landing} options={{headerShown :false}}/>
+      <Stack.Screen name="Reference" component={Reference} options={{headerShown :false}}/>
+      <Stack.Screen name="Digital Library" component={DigLib} options={{headerShown :false}}/>
     </Stack.Navigator>
   );
 }
@@ -41,12 +49,12 @@ function StackHome() {
 function StackRegisteration() {
     return (
       <Stack.Navigator initialRouteName="Main">
-        <Stack.Screen name="Main" component={Main} options={{ headerTitle:(props) => <HeaderImage {...props} />}} />
-        <Stack.Screen name="SignUp" component={SignUp}  />
-        <Stack.Screen name="Otp" component={Otp} />
-        <Stack.Screen name="Password" component={Password} />
-        <Stack.Screen name="Welcome" component={Welcome} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Main" component={Main}  options={{headerShown :false}}/>
+        <Stack.Screen name="SignUp" component={SignUp}  options={{headerShown :false}}/>
+        <Stack.Screen name="Otp" component={Otp}  options={{headerShown :false}}/>
+        <Stack.Screen name="Password" component={Password} options={{headerShown :false}}/>
+        <Stack.Screen name="Welcome" component={Welcome}  options={{headerShown :false}}/>
+        <Stack.Screen name="Login" component={Login} options={{headerShown :false}}/>
       </Stack.Navigator>
     );
   }
@@ -55,12 +63,27 @@ function StackRegisteration() {
   function StackAbout() {
     return (
       <Stack.Navigator initialRouteName="AboutUs" >
-        <Stack.Screen name="About Us" component={AboutUs}  options={{ headerTitle:(props) => <HeaderImage {...props} /> }} />
-        <Stack.Screen name="Donation" component={Donation} options={{headerShown:true}}/>
-        <Stack.Screen name="Staff Directory" component={StaffDirect} options={{headerShown:false}}/>
+        <Stack.Screen name="About Us" component={AboutUs} options={{headerShown :false}}/>
+        <Stack.Screen name="Donation" component={Donation} options={{headerShown :false}}/>
+        <Stack.Screen name="Staff Directory" component={StaffDirect} options={{headerShown :false}}/>
+      </Stack.Navigator>
+    );
+  }
+  function StackContact() {
+    return (
+      <Stack.Navigator initialRouteName="Contact Us" >
+        <Stack.Screen name="Contact Us" component={Contact}  options={{headerShown :false}} />
       </Stack.Navigator>
     );
   }
 
 
-export  {StackHome,StackRegisteration ,StackAbout ,HeaderImage};
+export  {StackHome,StackRegisteration ,StackAbout,StackContact};
+
+const styles=StyleSheet.create({
+  header:
+  {
+    flex:1,
+    flexDirection:'row'
+  }
+})

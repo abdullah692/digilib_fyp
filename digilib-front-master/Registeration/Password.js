@@ -35,7 +35,7 @@ function Password({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
-          <Image style={{ width:200, height:200 }} source={
+          <Image style={{ width:150, height:160 }} source={
                         require('../assets/lock.png') } resizeMode="contain" />
             </View>
       <TextInput
@@ -87,13 +87,13 @@ const styles = StyleSheet.create({
   },
   btn:
     {
-      fontSize: 30,
-      borderRadius: 60,
+      fontSize: 25,
+      borderRadius: 10,
       backgroundColor: '#74b1e0',
       color: '#fff',
-      paddingHorizontal: 30,
+      paddingHorizontal: 20,
       paddingVertical: 10,
-      marginBottom:30
+      marginBottom:10
     },
     
     text: {

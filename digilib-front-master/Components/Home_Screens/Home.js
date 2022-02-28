@@ -1,11 +1,13 @@
 import React,{useState,useEffect} from 'react'
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity,Dimensions } from 'react-native'
 import Swiper from 'react-native-swiper'
-var { width } = Dimensions.get("window")
+import {useIsFocused} from '@react-navigation/native'
 
+var { width } = Dimensions.get("window");
 
 function Home({navigation}) {
     const [banner, setBanner] = useState([]);
+    const isVisible = useIsFocused();
 
     useEffect(() => {
         setBanner(["https://library.neduet.edu.pk/sites/default/files/library%20campus.png",
@@ -13,14 +15,15 @@ function Home({navigation}) {
             "https://library.neduet.edu.pk/sites/default/files/CIR%201.png"])
         return () => {
             setBanner([])
+            console.log('focused');
         }
-    }, [])
+    }, [isVisible])
 
     return (
         <ScrollView>
 
             <View style={styles.container}>
-                <View style={styles.btns}>
+            <View style={styles.btns}>
                     <TouchableOpacity onPress={()=>navigation.navigate('Lending')}>
                         <Text style={styles.txt}>Lending</Text>
                     </TouchableOpacity>
@@ -33,8 +36,7 @@ function Home({navigation}) {
                         <Text style={styles.txt}>Digital Library</Text>
                     </TouchableOpacity>
                 </View>
-                
-                <View style={styles.swiper}>
+            <View style={styles.swiper}>
                     <Swiper
                         style={{ height:width / 2 }}
                         showButton={false}
@@ -46,22 +48,16 @@ function Home({navigation}) {
                                 <Image
                                     key={item}
                                     style={styles.imageBanner}
-                                   resizeMode="cover"
+                                   
                                source={{ uri: item }} />
                             )
                         })}
                     </Swiper>
-                </View>
-           <View>
-           <Image style={{ width:360, height:120 ,marginHorizontal:15}} source={
-                        require('../../assets/abdulkalam.png') } resizeMode="contain" />
-           </View>
-          
-                <View >
-                    <Image style={{ width:300, height:200,marginHorizontal:45}} source={
-                        require('../../assets/library.jpg') } resizeMode="contain" />
-                </View>
-
+              </View>
+                
+              <Image style={{ width:300, height:110 ,marginHorizontal:30 }} source={
+                        require('../../assets/abdulkalam.png')} resizeMode='contain' />
+                    
                 <View style={styles.content}>
                     <Text style={styles.heading}>Welcome Message</Text>
                     <Text style={styles.text}>It gives me immense pleasure to welcome you all to Engr. Abul Kalam Library. The NED University is proud to possess a well-equipped and fully computerized library.
@@ -78,7 +74,6 @@ function Home({navigation}) {
                     <Text style={styles.name}>Mrs. Huma Sardar (Ag. Librarian)</Text>
                 </View>
             </View>
-            
         </ScrollView>
     )
 }
@@ -92,16 +87,17 @@ const styles = StyleSheet.create({
     swiper:
     {
         width: width,
-        alignItems: 'center',
-        marginTop: 10
+        alignItems:'center',
+        marginTop:8
     },
     imageBanner:
     {
-        height: width / 2,
-        width:"100%",
-        padding:2,
+        height: width /2,
+        width: width-2,
+        marginHorizontal:1,
+        borderWidth:1,
+        borderColor:'black'
     },
-   
     btns:
     {
         flex: 1,
@@ -123,8 +119,10 @@ const styles = StyleSheet.create({
     heading:
     {
         fontSize: 28,
-        marginBottom: 20,
+        marginTop:20,
+        marginBottom: 5,
         color: "#000",
+        textAlign:"center"
     },
     text:
     {

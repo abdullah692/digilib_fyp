@@ -17,7 +17,7 @@ function Otp(props) {
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
-          <Image style={{ width:180, height:200 }} source={
+          <Image style={{ width:150, height:150 }} source={
                         require('../assets/notification.png') } resizeMode="contain" />
             </View>
       <Text style={styles.register}>VERIFICATION</Text>
@@ -73,12 +73,13 @@ const styles = StyleSheet.create({
    },
     btn:
     {
-      fontSize: 30,
-      borderRadius: 60,
+      fontSize: 25,
+      borderRadius: 5,
       backgroundColor: '#74b1e0',
       color: '#fff',
-      paddingHorizontal: 30,
-      paddingVertical: 10
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+      marginBottom:10
   
     },
   
