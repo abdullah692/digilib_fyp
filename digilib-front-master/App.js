@@ -1,13 +1,23 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import React,{useEffect} from 'react';
+import { StyleSheet ,StatusBar} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import DrawerContainer from './Drawer/DrawerContainer';
-
+import SplashScreen from 'react-native-splash-screen';
 
 
 function App() {
+  
+  useEffect(()=>{
+    SplashScreen.hide();
+  })
+
   return (
     <NavigationContainer>
+      <StatusBar 
+      backgroundColor={"#fff"}
+      barStyle='dark-content'
+    />
+
         <DrawerContainer/>
     </NavigationContainer>
   

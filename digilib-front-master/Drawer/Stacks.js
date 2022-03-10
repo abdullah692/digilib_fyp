@@ -39,7 +39,7 @@ function StackHome() {
   return (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={Home} options={{headerShown :false}}/>
-      <Stack.Screen name="Lending" component={Landing} options={{headerShown :false}}/>
+      <Stack.Screen name="Lending" component={Landing} options={{headerShown :true}}/>
       <Stack.Screen name="Reference" component={Reference} options={{headerShown :false}}/>
       <Stack.Screen name="Digital Library" component={DigLib} options={{headerShown :false}}/>
     </Stack.Navigator>
@@ -64,7 +64,7 @@ function StackRegisteration() {
     return (
       <Stack.Navigator initialRouteName="AboutUs" >
         <Stack.Screen name="About Us" component={AboutUs} options={{headerShown :false}}/>
-        <Stack.Screen name="Donation" component={Donation} options={{headerShown :false}}/>
+        <Stack.Screen name="Donation" component={Donation} options={{headerShown :true}}/>
         <Stack.Screen name="Staff Directory" component={StaffDirect} options={{headerShown :false}}/>
       </Stack.Navigator>
     );

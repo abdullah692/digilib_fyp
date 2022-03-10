@@ -26,8 +26,6 @@ export default function DrawerContainer() {
   }
   
   return (
-    
-    
       <Drawer.Navigator initialRouteName="Home"  drawerContent={props => <CustomDrawer {...props}/>}>       
         <Drawer.Screen name="Home" component={HomeTabs} options={{headerTitle:()=>(<HeaderImage/> )}}/>
         <Drawer.Screen name="Registration" component={StackRegisteration} options={{headerTitle:()=>(<HeaderImage/> )}}/>
@@ -36,8 +34,6 @@ export default function DrawerContainer() {
       </Drawer.Navigator>      
   );
 }
-
-
 const styles=StyleSheet.create({
   header:
   {
