@@ -6,6 +6,7 @@ import { Picker } from '@react-native-picker/picker';
 import Otp from './Otp';
 // import Register from './Register';
 
+
 function SignUp(props) {
   const { navigation } = props;
   const [email, setEmail] = useState('');
@@ -13,12 +14,15 @@ function SignUp(props) {
   const [error, setError] = useState('');
   const [picker, setPicker] = useState('Both Department');
   const [allEntry, setAllEntry] = useState([]);
+  
+
   const handleSubmit = () => {
     const users = {
       email: email,
       portal: portal,
       picker: picker
-    };
+    };    
+
     if (email === '' && portal === '') {
       setError('Please fill your Credentials');
     }
@@ -31,11 +35,14 @@ function SignUp(props) {
     else (email && portal)
     {
       setAllEntry([users, ...allEntry])
-      console.log(users);
+      const JSONdata=JSON.stringify(users);
+      console.log(JSONdata);
       console.log(allEntry);
       console.log('Success..!!');
     }
   };
+
+
 
   const handleNext = () => {
     handleSubmit();

@@ -1,0 +1,63 @@
+[
+
+    {
+        "id":1,
+        "roll_no":"CT-18047",
+        "name":"Muhammad Abdullah Siddiqui",
+        "fathers_name":"Nadeem Siddiqui",
+        "Address":"B-53 Bilal Town Malir Halt ,Karachi",
+        "Batch":"2018-19",
+        "Department":"CSIT",
+        "Membership":"Both Departments",
+        "Cell_No":"03352116800",
+        "Email":"abdullahsidd37@gmail.com",
+        "year":"Fourth Year"
+    },
+    
+    {
+            
+            "id":2,
+            "roll_no":"SE-18024",
+            "name":"Dua Siddiqui",
+            "fathers_name":"Raheel Ahmed Siddiqui",
+            "Address":"H-22 Street II , North Nazimabad ,Karachi",
+            "Batch":"2018-2019",
+            "Department":"SE",
+            "Membership":"Book Bank Department",
+            "Cell_No":"03342391677",
+            "Email":"duasidd09@gmail.com",
+            "year":"Third Year"
+        },
+        
+        {
+            
+            "id":3,
+            "roll_no":"EL-18002",
+            "name":"Abdul Subhan",
+            "fathers_name":"Sohaib Ahmed",
+            "Address":"B-53 Bilal Town Malir Halt",
+            "Batch":"2018-2019",
+            "Department":"EL",
+            "Membership":"Circulation Departments",
+            "Cell_No":"03352116800",
+            "Email":"subhanahmed7@gmail.com",
+            "year":"First Year"
+        },
+        
+        {
+            
+            "id":4,
+            "roll_no":"ME-18049",
+            "name":"Muhammad Ali",
+            "fathers_name":"Ahmed Sheikh",
+            "Address":"B-53 Bilal Town Malir Halt",
+            "Batch":"2018-2019",
+            "Department":"ME",
+            "Membership":"Both Departments",
+            "Cell_No":"03352116800",
+            "Email":"ali507@gmail.com",
+            "year":"Second Year"
+        }
+    
+    
+]

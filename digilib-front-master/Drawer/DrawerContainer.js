@@ -4,14 +4,11 @@ import { StyleSheet ,Image,View} from 'react-native';
 import ContactUs from '../Components/Contact_Screens/ContactUs'
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator} from '@react-navigation/drawer';
-import { StackAbout,StackRegisteration,StackHome } from './Stacks';
-import Main from '../Registeration/Main';
+import {StackUserProfile,StackRegisteration } from './Stacks';
 import CustomDrawer from './CustomDrawer';
-import Welcome from '../Registeration/Welcome';
-import Login from '../Registeration/Login';
 import MyTabs, { AboutTabs, ContactTabs } from './TabNavigator';
 import { HomeTabs } from './TabNavigator';
-import Icon from 'react-native-vector-icons/FontAwesome'
+ 
 
 const Drawer = createDrawerNavigator();
 
@@ -31,6 +28,7 @@ export default function DrawerContainer() {
         <Drawer.Screen name="Registration" component={StackRegisteration} options={{headerTitle:()=>(<HeaderImage/> )}}/>
         <Drawer.Screen name="About Us" component={AboutTabs} options={{headerTitle:()=>(<HeaderImage/> )}}/>
         <Drawer.Screen name="Contact Us" component={ContactTabs} options={{headerTitle:()=>(<HeaderImage/> )}}/>
+        <Drawer.Screen name="User Profile" component={StackUserProfile} options={{headerTitle:()=>(<HeaderImage/> )}}/>
       </Drawer.Navigator>      
   );
 }

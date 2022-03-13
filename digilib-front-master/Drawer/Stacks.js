@@ -17,7 +17,7 @@ import Main from '../Registeration/Main';
 import Welcome from '../Registeration/Welcome';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Contact from '../Components/Contact_Screens/ContactUs';
-import DrawerContainer from './DrawerContainer';
+import UserProfile from '../Components/User_Profile/UserProfile';
 
 const Stack = createStackNavigator();
 
@@ -77,8 +77,16 @@ function StackRegisteration() {
     );
   }
 
+  function StackUserProfile() {
+    return (
+      <Stack.Navigator initialRouteName="User Profile" >
+        <Stack.Screen name="User Profile" component={UserProfile}  options={{headerShown :false}} />
+      </Stack.Navigator>
+    );
+  }
 
-export  {StackHome,StackRegisteration ,StackAbout,StackContact};
+
+export  {StackHome,StackRegisteration ,StackAbout,StackContact,StackUserProfile};
 
 const styles=StyleSheet.create({
   header:

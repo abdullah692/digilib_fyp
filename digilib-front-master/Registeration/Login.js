@@ -4,6 +4,7 @@ import { View, StyleSheet, Text, TextInput, TouchableOpacity, Image } from 'reac
 import Error from './Error';
 import { Picker } from '@react-native-picker/picker';
 import Otp from './Otp';
+
 // import Register from './Register';
 
 function Login(props) {
@@ -13,11 +14,16 @@ function Login(props) {
   const [error, setError] = useState('');
   const [password,setPassword]=useState('');
   const [allEntry, setAllEntry] = useState([]);
+  
+
   const handleSubmit = () => {
     const users = {
       portal: portal,
       password: password
     };
+
+
+
     if (portal === '' && password==='') {
       setError('Please fill your Credentials');
     }
@@ -32,6 +38,7 @@ function Login(props) {
     else (password && portal)
     {
       setAllEntry([users, ...allEntry])
+     
       console.log(users);
       console.log(allEntry);
       console.log('Success..!!');
@@ -40,7 +47,7 @@ function Login(props) {
 
   const handleNext = () => {
     handleSubmit();
-    navigation.navigate('Home');
+    navigation.navigate('Home') || navigation.popToTop();
   };
 
   return (
