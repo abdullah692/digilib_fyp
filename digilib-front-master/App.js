@@ -1,26 +1,38 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import AboutUs from './Components/AboutUs';
-import ContactUs from './Components/ContactUs';
-import Home from './Components/Home';
-import StackNavigation from './Registeration/Stack';
+import React,{useEffect} from 'react';
+import { StyleSheet ,StatusBar} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import DrawerContainer from './Drawer/DrawerContainer';
+import SplashScreen from 'react-native-splash-screen';
 
-const Drawer = createDrawerNavigator();
 
 function App() {
+  
+  useEffect(()=>{
+    SplashScreen.hide();
+  })
+
   return (
-    <NavigationContainer >
-      <Drawer.Navigator initialRouteName="Home" >
-        <Drawer.Screen name="Home" component={Home} />
-        <Drawer.Screen name="Registration" component={StackNavigation} />
-        <Drawer.Screen name="About Us" component={AboutUs} />
-        <Drawer.Screen name="Contact Us" component={ContactUs} />
-      </Drawer.Navigator>
+    <NavigationContainer>
+      <StatusBar 
+      backgroundColor={"#fff"}
+      barStyle='dark-content'
+    />
+
+        <DrawerContainer/>
     </NavigationContainer>
-  );
-}
+  
+  ); 
+  }
+      {/* <Drawer.Navigator initialRouteName="Home" >       
+        <Drawer.Screen name="Home" component={StackHome} />
+        <Drawer.Screen name="Registration" component={StackRegisteration} />
+        <Drawer.Screen name="About Us" component={StackAbout} />
+        <Drawer.Screen name="Contact Us" component={ContactUs} />
+        <Drawer.Screen name="Main Screen" component={Main} />
+      </Drawer.Navigator>       */}
+    
+  
+
 
 export default App;
 

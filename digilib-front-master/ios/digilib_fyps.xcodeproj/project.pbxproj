@@ -109,6 +109,7 @@
 				00E356EF1AD99517003FC87E /* digilib_fypsTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				340E1CC35D6B4CFAA8BD3F58 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -123,6 +124,14 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		340E1CC35D6B4CFAA8BD3F58 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 

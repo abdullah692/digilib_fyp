@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import Error from './Error';
 import {Picker} from '@react-native-picker/picker';
@@ -19,7 +20,9 @@ function Login(props) {
   const [portal, setPortal] = useState('');
   const [error, setError] = useState('');
   const [picker, setPicker] = useState('both');
+  const [password, setPassword] = useState('');
   const [allEntry, setAllEntry] = useState([]);
+
   const handleSubmit = () => {
     const users = {
       email: email,
@@ -59,46 +62,43 @@ function Login(props) {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.register}>USER INFO</Text>
-
-        <TextInput
-          style={styles.text}
-          placeholder="Portal_Id"
-          value={portal}
-          keyboardType="decimal-pad"
-          onChangeText={id => setPortal(id.toLowerCase())}
+      <View style={styles.logo}>
+        <Image
+          style={{width: 150, height: 150}}
+          source={require('../assets/fyplogo.png')}
+          resizeMode="contain"
         />
-        <TextInput
-          style={styles.text}
-          placeholder="Email Address"
-          keyboardType="email-address"
-          value={email}
-          onChangeText={email => setEmail(email.toLowerCase())}
-        />
-        <View style={styles.border}>
-          <Picker
-            selectedValue={picker}
-            style={{height: 50, width: 150}}
-            onValueChange={itemValue => setPicker(itemValue)}
-            style={styles.picker}>
-            <Picker.Item label="Both Department" value="both" />
-            <Picker.Item label="Book Bank Department" value="bookbank" />
-            <Picker.Item label="Circulation Department" value="circulation" />
-          </Picker>
-        </View>
-        <View style={styles.error}>
-          {error ? <Error message={error} /> : null}
-        </View>
+      </View>
+      <Text style={styles.register}>WELCOME BACK!</Text>
 
-        {/* <View style={[{marginTop: 40}, styles.btn]}>
+      <TextInput
+        style={styles.text}
+        placeholder="Portal_Id"
+        value={portal}
+        keyboardType="decimal-pad"
+        onChangeText={id => setPortal(id.toLowerCase())}
+      />
+
+      <TextInput
+        style={styles.text}
+        placeholder="Password"
+        value={password}
+        onChangeText={pass => setPassword(pass.toLowerCase())}
+      />
+      <View style={styles.error}>
+        {error ? <Error message={error} /> : null}
+      </View>
+
+      {/* <View style={[{marginTop: 40}, styles.btn]}>
           <Text style={styles.middle}>Don't have any account yet?</Text>
           <Button title="Register"/>
         </View> */}
-      </View>
-      <TouchableOpacity style={styles.button} onPress={() => handleNext()}>
-        <Text style={styles.btn}>NEXT</Text>
+      <TouchableOpacity onPress={() => handleNext()}>
+        <Text style={styles.btn}> NEXT </Text>
       </TouchableOpacity>
+      <View>
+        <Text style={styles.forgot}>Create Account | Forgot Password</Text>
+      </View>
     </View>
   );
 }
@@ -108,17 +108,17 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d8d8d8',
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
   },
+  logo: {
+    marginTop: -50,
+  },
   register: {
-    color: '#0F9E90',
-    textAlign: 'center',
-    fontSize: 45,
-    fontWeight: 'bold',
-    fontFamily: 'sans',
-    marginBottom: 20,
+    fontSize: 30,
+    margin: 10,
+    color: '#000',
   },
   text: {
     borderBottomWidth: 2,
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     padding: 10,
     width: 250,
-    borderColor: '#0F9E90',
+    borderColor: '#74b1e0',
     color: '#000',
   },
   error: {
@@ -134,16 +134,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   btn: {
-    borderWidth: 2,
-    borderColor: '#0F9E90',
-    padding: 5,
-    fontSize: 30,
-    width: 150,
-    textAlign: 'center',
-    fontFamily: 'sans-serif',
-    borderRadius: 10,
+    fontSize: 25,
+    borderRadius: 5,
+    backgroundColor: '#74b1e0',
     color: '#fff',
-    backgroundColor: '#82BABC',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginBottom: 20,
   },
   middle: {
     margin: 10,
@@ -159,5 +156,9 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     color: '#000',
+  },
+  forgot: {
+    margin: 20,
+    fontSize: 15,
   },
 });
