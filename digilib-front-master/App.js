@@ -1,25 +1,28 @@
-import React,{useEffect} from 'react';
-import { StyleSheet ,StatusBar} from 'react-native';
+import React,{useEffect,useReducer, useState} from 'react';
+import { StyleSheet ,StatusBar,View,ActivityIndicator} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import DrawerContainer from './Drawer/DrawerContainer';
 import SplashScreen from 'react-native-splash-screen';
+import { store } from './store'
+ import { Provider } from 'react-redux'
 
 
-function App() {
-  
+ function App() {
   useEffect(()=>{
     SplashScreen.hide();
   })
 
+  
   return (
+    <Provider store={store}>
     <NavigationContainer>
       <StatusBar 
       backgroundColor={"#fff"}
       barStyle='dark-content'
     />
-
         <DrawerContainer/>
     </NavigationContainer>
+    </Provider>
   
   ); 
   }

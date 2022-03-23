@@ -1,38 +1,33 @@
-import {createStackNavigator} from '@react-navigation/stack';
-import React, {useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import React, { useState ,useContext,useReducer} from 'react';
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import Error from './Error';
-import SignUp from './SignUp';
-import {Picker} from '@react-native-picker/picker';
-import Otp from './Otp';
+import {signIn} from '../store/auth/authSlice'
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 // import Register from './Register';
 
 function Login(props) {
   const {navigation} = props;
   const [email, setEmail] = useState('');
-  const [portal, setPortal] = useState('');
+  const [portal_Id, setPortal] = useState('');
   const [error, setError] = useState('');
   const [picker, setPicker] = useState('both');
-  const [password, setPassword] = useState('');
+  const [Password, setPassword] = useState('');
   const [allEntry, setAllEntry] = useState([]);
+  const userToken = useSelector((state) => state.auth.userToken)
+  const dispatch = useDispatch()
 
-  const handleSubmit = () => {
+
+  const loggedIn = (portal,password) => {
     const users = {
       email: email,
-      StudentId: portal,
+      StudentId: portal_Id,
       registrationType: picker,
     };
-    if (email === '' && portal === '') {
+    if (email === '' && portal_Id === '') {
       setError('Please fill your credentials');
-    } else if (portal === '') {
+    } else if (portal_Id === '') {
       setError('Please enter your portal-id');
     } else if (email === '') {
       setError('Please enter your email');
@@ -55,12 +50,16 @@ function Login(props) {
         })
         .catch(err => console.log(err));
     }
-  };
-
-  const handleNext = () => {
-    handleSubmit();
-    // navigation.navigate('Otp');
-  };
+    if(!error)
+    {
+      dispatch(signIn({portal,password}));
+      console.log("In login component Token",userToken);
+     if(userToken)
+     { 
+       navigation.navigate('Home') || navigation.popToTop(); 
+     }
+    
+}
 
   return (
     <View style={styles.container}>
@@ -76,7 +75,7 @@ function Login(props) {
       <TextInput
         style={styles.text}
         placeholder="Portal_Id"
-        value={portal}
+        value={portal_Id}
         keyboardType="decimal-pad"
         onChangeText={id => setPortal(id.toLowerCase())}
       />
@@ -84,7 +83,7 @@ function Login(props) {
       <TextInput
         style={styles.text}
         placeholder="Password"
-        value={password}
+        value={Password}
         onChangeText={pass => setPassword(pass.toLowerCase())}
       />
       <View style={styles.error}>
@@ -95,7 +94,7 @@ function Login(props) {
           <Text style={styles.middle}>Don't have any account yet?</Text>
           <Button title="Register"/>
         </View> */}
-      <TouchableOpacity onPress={() => handleNext()}>
+      <TouchableOpacity onPress={() => loggedIn(portal_Id,Password)}>
         <Text style={styles.btn}> NEXT </Text>
       </TouchableOpacity>
       <View style={styles.forget}>
@@ -110,7 +109,7 @@ function Login(props) {
     </View>
   );
 }
-
+}
 export default Login;
 
 const styles = StyleSheet.create({
