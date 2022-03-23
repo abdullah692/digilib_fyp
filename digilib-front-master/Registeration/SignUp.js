@@ -78,7 +78,7 @@ function SignUp(props) {
         <Picker
           selectedValue={picker}
           onValueChange={itemValue => setPicker(itemValue)}
-          style={styles.picker}>
+          style={{width:260}}>
           <Picker.Item label="Both Department" value="both" />
           <Picker.Item label="Book Bank Department" value="bookbank" />
           <Picker.Item label="Circulation Department" value="circulation" />
@@ -158,11 +158,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     marginVertical: 20,
   },
-  picker: {
-    width: 280,
-    color: '#000',
-    height: 50,
-    width: 150,
-  },
+  
   acount: {},
 });

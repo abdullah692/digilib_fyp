@@ -9,6 +9,7 @@ import {
   Image,
 } from 'react-native';
 import Error from './Error';
+import SignUp from './SignUp';
 import {Picker} from '@react-native-picker/picker';
 import Otp from './Otp';
 import axios from 'axios';
@@ -44,7 +45,8 @@ function Login(props) {
 
           if (!result.success) {
             setError(result.message);
-          } else {
+          } 
+           {
             setPortal('');
             setEmail('');
             setError('');
@@ -96,8 +98,14 @@ function Login(props) {
       <TouchableOpacity onPress={() => handleNext()}>
         <Text style={styles.btn}> NEXT </Text>
       </TouchableOpacity>
-      <View>
-        <Text style={styles.forgot}>Create Account | Forgot Password</Text>
+      <View style={styles.forget}>
+        <TouchableOpacity onPress={()=>navigation.navigate('SignUp')}>
+        <Text style={styles.forgot}>Create Account</Text>
+        </TouchableOpacity>
+        
+       
+        <Text style={{marginHorizontal:10}}>|   Forget Password</Text>
+        
       </View>
     </View>
   );
@@ -157,8 +165,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     color: '#000',
   },
-  forgot: {
-    margin: 20,
-    fontSize: 15,
-  },
-});
+ forget:
+ {
+   flexDirection:'row'
+
+ }
+})
+
