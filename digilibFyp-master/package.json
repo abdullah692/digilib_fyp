@@ -1,0 +1,51 @@
+{
+  "name": "digilib_fyps",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.17.0",
+    "@react-native-community/checkbox": "^0.5.9",
+    "@react-native-picker/picker": "^2.2.1",
+    "@react-navigation/drawer": "^6.1.8",
+    "@react-navigation/material-bottom-tabs": "^6.1.1",
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/native-stack": "^6.2.5",
+    "@react-navigation/stack": "^6.0.11",
+    "@reduxjs/toolkit": "^1.8.0",
+    "expo": ">=44.0.0-0 <45.0.0",
+    "expo-barcode-scanner": "^11.2.1",
+    "react": "17.0.2",
+    "react-native": "0.66.4",
+    "react-native-gesture-handler": "^2.1.0",
+    "react-native-html-to-pdf": "^0.12.0",
+    "react-native-paper": "^4.11.2",
+    "react-native-print": "^0.10.0",
+    "react-native-reanimated": "^2.2.4",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.10.1",
+    "react-native-splash-screen": "^3.3.0",
+    "react-native-swiper": "^1.6.0",
+    "react-native-vector-icons": "^9.1.0",
+    "react-redux": "^7.2.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/runtime": "^7.16.7",
+    "@react-native-community/eslint-config": "^3.0.1",
+    "babel-jest": "^27.4.6",
+    "eslint": "^8.6.0",
+    "jest": "^27.4.7",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "react-test-renderer": "17.0.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
