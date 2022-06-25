@@ -19,12 +19,7 @@
     "@react-navigation/native-stack": "^6.2.5",
     "@react-navigation/stack": "^6.0.11",
     "@reduxjs/toolkit": "^1.8.0",
-<<<<<<< HEAD:digilib-front-master/package.json
     "axios": "^0.24.0",
-=======
-    "expo": ">=44.0.0-0 <45.0.0",
-    "expo-barcode-scanner": "^11.2.1",
->>>>>>> 0c51cf98cd13a0bade8a7b99bb01cf32168719a7:digilibFyp-master/package.json
     "react": "17.0.2",
     "react-native": "0.66.4",
     "react-native-gesture-handler": "^2.1.0",
