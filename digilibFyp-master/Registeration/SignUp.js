@@ -83,16 +83,9 @@ function SignUp(props) {
       />
       <View style={styles.border}>
         <Picker
-          selectedValue={picker}
-<<<<<<< HEAD:digilib-front-master/Registeration/SignUp.js
+          // selectedValue={picker}
           onValueChange={itemValue => setPicker(itemValue)}
           style={{width: 260}}>
-=======
-          style={{ height: 50, width: 150 }}
-          onValueChange={(itemValue) => setPicker(itemValue)}
-          style={styles.picker}
-        >
->>>>>>> 0c51cf98cd13a0bade8a7b99bb01cf32168719a7:digilibFyp-master/Registeration/SignUp.js
           <Picker.Item label="Both Department" value="both" />
           <Picker.Item label="Book Bank Department" value="bookbank" />
           <Picker.Item label="Circulation Department" value="circulation" />
@@ -181,12 +174,7 @@ const styles = StyleSheet.create({
     width: 280,
     color: '#000'
   },
-  acount:
-  {
-  },
-<<<<<<< HEAD:digilib-front-master/Registeration/SignUp.js
-
-  acount: {},
-=======
->>>>>>> 0c51cf98cd13a0bade8a7b99bb01cf32168719a7:digilibFyp-master/Registeration/SignUp.js
+  // acount:
+  // {
+  // },
 });

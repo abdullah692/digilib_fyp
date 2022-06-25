@@ -165,14 +165,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     color: '#000'
   },
-<<<<<<< HEAD:digilib-front-master/Registeration/Login.js
-  forget: {
-    flexDirection: 'row',
-  },
-=======
-  forget:
- {
-   flexDirection:'row'
- }
->>>>>>> 0c51cf98cd13a0bade8a7b99bb01cf32168719a7:digilibFyp-master/Registeration/Login.js
+  // forget: {
+  //   flexDirection: 'row',
+  // },
 });
