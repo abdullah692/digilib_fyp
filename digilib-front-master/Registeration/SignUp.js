@@ -11,6 +11,7 @@ import {
 import Error from './Error';
 import {Picker} from '@react-native-picker/picker';
 import Otp from './Otp';
+import axios from 'axios';
 // import Register from './Register';
 
 function SignUp(props) {
@@ -18,14 +19,13 @@ function SignUp(props) {
   const [email, setEmail] = useState('');
   const [portal, setPortal] = useState('');
   const [error, setError] = useState('');
-  const [picker, setPicker] = useState('Both Department');
-  const [allEntry, setAllEntry] = useState([]);
+  const [picker, setPicker] = useState('both');
 
   const handleSubmit = () => {
     const users = {
       email: email,
-      portal: portal,
-      picker: picker,
+      StudentId: parseInt(portal),
+      registrationType: picker,
     };
 
     if (email === '' && portal === '') {
@@ -34,19 +34,30 @@ function SignUp(props) {
       setError('Please Enter Your Portal-Id');
     } else if (email === '') {
       setError('Please Enter Your Email');
-    } else email && portal;
-    {
-      setAllEntry([users, ...allEntry]);
-      const JSONdata = JSON.stringify(users);
-      console.log(JSONdata);
-      console.log(allEntry);
-      console.log('Success..!!');
+    } else {
+      setError('');
+      axios
+        .post('http://10.0.2.2:8080/api/verifyUser', users)
+        .then(res => {
+          const result = res.data;
+          console.log('sign up Ap response log', res.data);
+
+          if (!result.success) {
+            setError(result.message);
+          } else {
+            setPortal('');
+            setEmail('');
+            setError('');
+            navigation.navigate('Otp', users);
+          }
+        })
+        .catch(err => console.log(err));
     }
   };
 
   const handleNext = () => {
     handleSubmit();
-    navigation.navigate('Otp');
+    // navigation.navigate('Otp');
   };
 
   return (
@@ -78,7 +89,7 @@ function SignUp(props) {
         <Picker
           selectedValue={picker}
           onValueChange={itemValue => setPicker(itemValue)}
-          style={{width:260}}>
+          style={{width: 260}}>
           <Picker.Item label="Both Department" value="both" />
           <Picker.Item label="Book Bank Department" value="bookbank" />
           <Picker.Item label="Circulation Department" value="circulation" />
@@ -158,6 +169,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     marginVertical: 20,
   },
-  
+
   acount: {},
 });

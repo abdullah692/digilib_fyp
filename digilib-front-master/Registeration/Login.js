@@ -1,66 +1,66 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import React, { useState ,useContext,useReducer} from 'react';
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
+import React, {useState, useContext, useReducer} from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import Error from './Error';
-import {signIn} from '../store/auth/authSlice'
-import { useDispatch, useSelector } from 'react-redux';
+import {signIn} from '../store/auth/authSlice';
+import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 // import Register from './Register';
 
 function Login(props) {
   const {navigation} = props;
-  const [email, setEmail] = useState('');
   const [portal_Id, setPortal] = useState('');
   const [error, setError] = useState('');
-  const [picker, setPicker] = useState('both');
   const [Password, setPassword] = useState('');
-  const [allEntry, setAllEntry] = useState([]);
-  const userToken = useSelector((state) => state.auth.userToken)
-  const dispatch = useDispatch()
+  const userToken = useSelector(state => state.auth.userToken);
+  const dispatch = useDispatch();
 
-
-  const loggedIn = (portal,password) => {
-    const users = {
-      email: email,
+  const loggedIn = (portal, password) => {
+    const user = {
       StudentId: portal_Id,
-      registrationType: picker,
     };
-    if (email === '' && portal_Id === '') {
+    if (password === '' && portal === '') {
       setError('Please fill your credentials');
-    } else if (portal_Id === '') {
+    } else if (portal === '') {
       setError('Please enter your portal-id');
-    } else if (email === '') {
-      setError('Please enter your email');
+    } else if (password === '') {
+      setError('Please enter your password');
     } else {
       setError('');
+      let body = {
+        StudentId: parseInt(portal),
+        password: password,
+      };
       axios
-        .post('http://10.0.2.2:8080/api/verifyUser', users)
+        .post('http://10.0.2.2:8080/api/signIn', body)
         .then(res => {
+          console.log('Api Respones ====', res.data);
           const result = res.data;
-
-          if (!result.success) {
-            setError(result.message);
-          } 
-           {
-            setPortal('');
-            setEmail('');
-            setError('');
-            navigation.navigate('Otp', users);
+          if (result.success) {
+            dispatch(signIn({result}));
+            navigation.navigate('Home') || navigation.popToTop();
+          } else {
+            return alert('Invalid request');
           }
         })
         .catch(err => console.log(err));
     }
-    if(!error)
-    {
-      dispatch(signIn({portal,password}));
-      console.log("In login component Token",userToken);
-     if(userToken)
-     { 
-       navigation.navigate('Home') || navigation.popToTop(); 
-     }
-    
-}
+    // if (!error) {
 
+    //   console.log('In login component Token', userToken);
+    //   if (userToken) {
+    //     navigation.navigate('Home') || navigation.popToTop();
+    //   }
+    // }
+  };
+  console.log('token log in login screeen *****', userToken);
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
@@ -83,6 +83,7 @@ function Login(props) {
       <TextInput
         style={styles.text}
         placeholder="Password"
+        secureTextEntry={true}
         value={Password}
         onChangeText={pass => setPassword(pass.toLowerCase())}
       />
@@ -94,21 +95,18 @@ function Login(props) {
           <Text style={styles.middle}>Don't have any account yet?</Text>
           <Button title="Register"/>
         </View> */}
-      <TouchableOpacity onPress={() => loggedIn(portal_Id,Password)}>
+      <TouchableOpacity onPress={() => loggedIn(portal_Id, Password)}>
         <Text style={styles.btn}> NEXT </Text>
       </TouchableOpacity>
       <View style={styles.forget}>
-        <TouchableOpacity onPress={()=>navigation.navigate('SignUp')}>
-        <Text style={styles.forgot}>Create Account</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+          <Text style={styles.forgot}>Create Account</Text>
         </TouchableOpacity>
-        
-       
-        <Text style={{marginHorizontal:10}}>|   Forget Password</Text>
-        
+
+        <Text style={{marginHorizontal: 10}}>| Forget Password</Text>
       </View>
     </View>
   );
-}
 }
 export default Login;
 
@@ -164,10 +162,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     color: '#000',
   },
- forget:
- {
-   flexDirection:'row'
-
- }
-})
-
+  forget: {
+    flexDirection: 'row',
+  },
+});
