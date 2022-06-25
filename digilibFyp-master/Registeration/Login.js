@@ -9,7 +9,6 @@ import {
   Image,
 } from 'react-native';
 import Error from './Error';
-<<<<<<< HEAD:digilib-front-master/Registeration/Login.js
 import {signIn} from '../store/auth/authSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
@@ -62,80 +61,6 @@ function Login(props) {
     // }
   };
   console.log('token log in login screeen *****', userToken);
-=======
-import {signIn} from '../store/auth/authSlice'
-import { useDispatch, useSelector } from 'react-redux';
-
-// import Register from './Register';
-
-function Login(props) {
-  const { navigation } = props;
-  const [portal_id, setPortal] = useState('');
-  const [error, setError] = useState('');
-  const [Password, setPassword] = useState('');
-  const [allEntry, setAllEntry] = useState([]);
-  const userToken = useSelector((state) => state.auth.userToken)
-  const dispatch = useDispatch()
-  
-
-  
-  // const userDetail = {
-  //   portal_id: "4103149",
-  //   password: 'admin12345'
-  // }
-
- 
-
-  const loggedIn = (portal,password) => {
-    const users = {
-      portal: portal_id,
-      password: Password
-    };
-    if (portal_id === '' && Password === '') {
-      setError('Please fill your Credentials');
-    }
-    else if (portal_id === '') {
-      setError('Please Enter Your Portal-Id');
-    }
-    else if (Password === '') {
-      setError('Please Enter Your Password')
-    }
-    else (Password && portal_id)
-    {
-      setAllEntry([users, ...allEntry])
-
-      console.log(users);
-      console.log(allEntry);
-      console.log('Success..!!');
-    }
-    console.log(portal,password);
-    if(!error)
-    {
-      dispatch(signIn({portal,password}));
-      console.log("In login component Token",userToken);
-     if(userToken)
-     { 
-       navigation.navigate('Home') || navigation.popToTop(); 
-     }
-    
-}
-
-  // const handleNext = () => {
-  //   handleSubmit();
-  //   if(portal_id.length != 0 && Password.length !=0)
-  //   {
-  //     loggedIn(portal_id,Password);
-  //   }
-    
-
-    // // loggedIn(portal.portal ,password.password)
-    // // {
-    // //   navigation.navigate('Home') || navigation.popToTop();
-    // // }
-  };
-
-
->>>>>>> 0c51cf98cd13a0bade8a7b99bb01cf32168719a7:digilibFyp-master/Registeration/Login.js
   return (
     <View style={styles.container}>
 
@@ -156,11 +81,7 @@ function Login(props) {
       <TextInput
         style={styles.text}
         placeholder="Password"
-<<<<<<< HEAD:digilib-front-master/Registeration/Login.js
         secureTextEntry={true}
-=======
-        secureTextEntry={false}
->>>>>>> 0c51cf98cd13a0bade8a7b99bb01cf32168719a7:digilibFyp-master/Registeration/Login.js
         value={Password}
         onChangeText={pass => setPassword(pass.toLowerCase())}
       />
@@ -172,7 +93,6 @@ function Login(props) {
           <Text style={styles.middle}>Don't have any account yet?</Text>
           <Button title="Register"/>
         </View> */}
-<<<<<<< HEAD:digilib-front-master/Registeration/Login.js
       <TouchableOpacity onPress={() => loggedIn(portal_Id, Password)}>
         <Text style={styles.btn}> NEXT </Text>
       </TouchableOpacity>
@@ -182,26 +102,11 @@ function Login(props) {
         </TouchableOpacity>
 
         <Text style={{marginHorizontal: 10}}>| Forget Password</Text>
-=======
-      <TouchableOpacity onPress={() => loggedIn(portal_id,Password)}>
-        <Text style={styles.btn}> NEXT </Text>
-      </TouchableOpacity>
-      <View style={styles.forget}>
-        <TouchableOpacity onPress={()=>navigation.navigate('SignUp')}>
-        <Text style={{color:'#74b1e0'}}>Create Account</Text>
-        </TouchableOpacity>
-        <Text style={{marginHorizontal:10}}>|   Forget Password</Text>
->>>>>>> 0c51cf98cd13a0bade8a7b99bb01cf32168719a7:digilibFyp-master/Registeration/Login.js
       </View>
     </View>
   );
 }
-<<<<<<< HEAD:digilib-front-master/Registeration/Login.js
 export default Login;
-=======
-
-export default Login ;
->>>>>>> 0c51cf98cd13a0bade8a7b99bb01cf32168719a7:digilibFyp-master/Registeration/Login.js
 
 const styles = StyleSheet.create({
   container: {

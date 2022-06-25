@@ -13,26 +13,14 @@ function SignUp(props) {
   const [email, setEmail] = useState('');
   const [portal, setPortal] = useState('');
   const [error, setError] = useState('');
-<<<<<<< HEAD:digilib-front-master/Registeration/SignUp.js
   const [picker, setPicker] = useState('both');
-=======
-  const [picker, setPicker] = useState('Both Department');
-  const [allEntry, setAllEntry] = useState([]);
-  
->>>>>>> 0c51cf98cd13a0bade8a7b99bb01cf32168719a7:digilibFyp-master/Registeration/SignUp.js
 
   const handleSubmit = () => {
     const users = {
       email: email,
-<<<<<<< HEAD:digilib-front-master/Registeration/SignUp.js
       StudentId: parseInt(portal),
       registrationType: picker,
     };
-=======
-      portal: portal,
-      picker: picker
-    };    
->>>>>>> 0c51cf98cd13a0bade8a7b99bb01cf32168719a7:digilibFyp-master/Registeration/SignUp.js
 
     if (email === '' && portal === '') {
       setError('Please fill your Credentials');
@@ -42,7 +30,6 @@ function SignUp(props) {
     }
     else if (email === '') {
       setError('Please Enter Your Email');
-<<<<<<< HEAD:digilib-front-master/Registeration/SignUp.js
     } else {
       setError('');
       axios
@@ -61,16 +48,6 @@ function SignUp(props) {
           }
         })
         .catch(err => console.log(err));
-=======
-    }
-    else (email && portal)
-    {
-      setAllEntry([users, ...allEntry])
-      const JSONdata=JSON.stringify(users);
-      console.log(JSONdata);
-      console.log(allEntry);
-      console.log('Success..!!');
->>>>>>> 0c51cf98cd13a0bade8a7b99bb01cf32168719a7:digilibFyp-master/Registeration/SignUp.js
     }
   };
 
